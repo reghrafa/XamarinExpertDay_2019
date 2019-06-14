@@ -1,0 +1,173 @@
+---
+id: b0419b80-606e-40d4-a862-aef3d5e91134
+title: Sample
+platforms:
+- iOS
+uti: com.xamarin.workbook
+---
+
+```csharp
+//Domain data
+public class SimpleDomainClass {
+    public nint Section { get; }
+    public nint Row { get; }
+
+    public SimpleDomainClass(nint section, nint row)
+    {
+        Section = section;
+        Row = row;
+    }
+
+    override public string ToString() => $"Section {Section}, Row {Row}";
+}
+
+var simpleDomainCollection = new [] {
+    new SimpleDomainClass(0, 0),
+    new SimpleDomainClass(0, 1),
+    new SimpleDomainClass(0, 2),
+    new SimpleDomainClass(1, 0),
+    new SimpleDomainClass(1, 1),
+    new SimpleDomainClass(1, 2)
+};
+```
+
+```csharp
+var tableView = new UITableView();
+```
+
+```csharp
+readonly string CELL_ID = nameof(UITableViewCell);
+tableView.RegisterClassForCellReuse(typeof(UITableViewCell), CELL_ID);
+```
+
+```csharp
+public class DomainSource : UITableViewSource
+{
+      SimpleDomainClass[] Model { get; }
+
+        public DomainSource (SimpleDomainClass[] model)
+        {
+            this.Model = model;
+        }
+
+        //The first section is section == 0 
+        public override nint RowsInSection (UITableView tableView, nint section)
+        {
+            // Matches the "Section" property with the passed-in section
+            return Model.Count((datum => datum.Section == section));
+        }
+
+        public override nint NumberOfSections(UITableView tableView)
+        {
+            return Model.GroupBy((datum) => datum.Section).Count();
+        }
+
+        //Note: For production, strive to make this method performant
+        public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
+        {
+            //Retrieve a cell from the system-maintained cache for the table. 
+            var cell = tableView.DequeueReusableCell (nameof(UITableViewCell), indexPath); //as MyTableViewCellType <-- Downcast as necessary
+            //RegisterForReuse guarantees cell is not null 
+
+            //Retrieve data
+            var sectionData = Model.Where(datum => datum.Section == indexPath.Section); 
+            
+            //Set the appearance of the cell based on the data and indexPath
+            cell.TextLabel.Text = sectionData.ElementAt(indexPath.Row).ToString();
+
+            return cell;
+        }
+    }
+    
+var simpleSource = new DomainSource(simpleDomainCollection);
+```
+
+```csharp
+tableView.Source = simpleSource;
+```
+
+```csharp
+var tvc = new UITableViewController(UITableViewStyle.Plain);
+tvc.TableView = tableView;
+RootViewController.PresentViewController(tvc, true, () => {});
+```
+
+```csharp
+//Notice that this is a subclass of DomainSource (which defines GetCell, RowsInSection, and NumberOfSections) 
+public class DomainSourceWithGroups : DomainSource
+{
+    public DomainSourceWithGroups(SimpleDomainClass[] data) : base(data) {}
+
+    //Both "GetViewFor{Header|Footer|" and "GetHeightFor{Header|Footer"}" must be overridden
+    public override UIView GetViewForHeader(UITableView tableView, nint section)
+    {
+        var l = new UILabel();
+        l.Text = $"Section {section}";
+        l.BackgroundColor = UIColor.White;
+        return l;
+    }
+
+    public override nfloat GetHeightForHeader(UITableView tableView, nint section)
+    {
+        return 20;
+    }
+
+    public override UIView GetViewForFooter(UITableView tableView, nint section)
+    {
+        var vw = new UIView();
+        vw.BackgroundColor = UIColor.Yellow;
+        return vw;
+    }
+
+    public override nfloat GetHeightForFooter(UITableView tableView, nint section)
+    {
+        return 5;
+    }
+}
+    
+var sourceWithSectionViews = new DomainSourceWithGroups(simpleDomainCollection);
+tableView.Source = sourceWithSectionViews;
+
+//Re-display
+tvc.DismissViewController(true, () => { RootViewController.PresentViewController(tvc, true, null);});
+```
+
+```csharp
+//Generic EventArgs subclass
+public class EventArgsT<T> : EventArgs
+{
+    public T Value { get; }
+    
+    public EventArgsT(T value) { this.Value = value; }
+}
+
+//Again, note that this inherits from UITableViewSource 
+class TouchDelegateToEvent : DomainSourceWithGroups {
+    public TouchDelegateToEvent(SimpleDomainClass [] data) : base(data) {}
+
+    public event EventHandler<EventArgsT<NSIndexPath>> OnRowSelected = delegate {};
+
+    public override void RowSelected(UITableView tableView, NSIndexPath path)
+    {
+        OnRowSelected(this, new EventArgsT<NSIndexPath>(path));
+    }
+}
+
+//Instantiate our new UITableViewSource and assign it
+var sourceWithTouch = new TouchDelegateToEvent(simpleDomainCollection);
+tableView.Source = sourceWithTouch;
+
+//Handle the touch event by showing a simple dialog
+sourceWithTouch.OnRowSelected += (sender, evt) => 
+{
+    NSIndexPath path = evt.Value;
+    var popup = UIAlertController.Create("Row touched", $"Section {path.Section} Row {path.Row}", UIAlertControllerStyle.Alert);
+    popup.AddAction(UIAlertAction.Create("Click", UIAlertActionStyle.Default, null));
+
+    tvc.PresentModalViewController(popup, true);
+
+};
+
+//Re-display
+tvc.DismissViewController(true, () => { RootViewController.PresentViewController(tvc, true, null);});
+```

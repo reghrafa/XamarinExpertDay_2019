@@ -1,0 +1,70 @@
+﻿[
+  {
+    "Name": "Luce Carter",
+    "Id": "1",
+    "ImageUrl": "https://expertday.forxamarin.com/wp-content/uploads/2018/05/20180501_202712.jpg",
+    "Description": "Luce is a software developer from Manchester, England. With a keen passion for all things Xamarin and .NET, she can often be found writing blog posts, attempting to record videos, co-curating the Weekly Xamarin online newsletter and running the Manchester Xamarin User Group. \n Away from Xamarin, she can be found pursuing her other passions including mentoring people from under represented backgrounds in tech in learning to code, training to run 5km faster and raising awareness of neurodiversity.",
+    "SocialMediaAccounts": [
+      {
+        "Network": 0,
+        "Url": "https://twitter.com/LuceCarter1"
+      }
+    ],
+    "Sessions": [
+      {
+        "Url": "http://www.developer-week.de/Programm/Veranstaltung/(event)/21431",
+        "Title": "Vom Code bis in die Produktion: ASP.NET Core mit Docker und VSTS nach Azure ",
+        "Time": "26.06.2017 17:00 - 18:00 Uhr",
+        "Track": ".NET Core"
+      }
+    ]
+  },
+  {
+    "Name": "Sia Ghassemi",
+    "Id": "2",
+    "ImageUrl": "https://expertday.forxamarin.com/wp-content/uploads/2019/03/sia.jpg",
+    "Description": "Sia Ghassemi is not just a passionate software architect and Microsoft MVP for the category Azure, he is also the founder of Sia-consulting limited, a company specialized in GDPR, dev-security, and cloud-security. He is a frequent speaker and workshop-lead at different conferences throughout Germany and Canada.",
+    "SocialMediaAccounts": [
+      {
+        "Network": 0,
+        "Url": "https://twitter.com/dersia_"
+      }
+    ],
+    "Sessions": [
+      {
+        "Url": "http://www.developer-week.de/Programm/Veranstaltung/(event)/21534",
+        "Title": "Threads lässt man nicht warten - The basics of &quot;async and await&quot; ",
+        "Time": "28.06.2017 14:15 - 15:15 Uhr",
+        "Track": ".NET"
+      }
+    ]
+  },
+  {
+    "Name": "Alexander Witkowski",
+    "Id": "3",
+    "ImageUrl": "https://expertday.forxamarin.com/wp-content/uploads/2019/03/Untitled-1-1.png",
+    "Description": "Alexander Witkowski is a developer, consultant and trainer at Develappers GmbH. His focus in recent years has been to enable teams to ship best in class Xamarin.Forms apps, before which he was involved in Windows development with UWP and WPF. \n Since 2016, he has been recognized by Microsoft as a Most Valuable Professional. In his spare time, he loves to connect hardware and software with projects relating to both “Internet of Things” and “Smart Home”.",
+    "SocialMediaAccounts": [
+      {
+        "Network": 0,
+        "Url": "https://twitter.com/Alex_Witkowski"
+      }
+    ],
+    "Sessions": [
+      {
+        "Url": "http://www.developer-week.de/Programm/Veranstaltung/(event)/21625",
+        "Title": "Containerised ASP.NET Core apps with Docker and Kubernetes",
+        "Time": "27.06.2017 11:45 - 12:45 Uhr",
+        "Track": "Cloud"
+      }
+    ]
+  },
+  {
+    "Name": "Martijn van Dijk",
+    "Id": "4",
+    "ImageUrl": "https://expertday.forxamarin.com/wp-content/uploads/2019/03/head_500.jpg",
+    "Description": "Martijn is a Microsoft and Xamarin MVP (Most valuable professional) with over 5 years of experience with Xamarin and 8 years of mobile development. He is passionate about building great apps that create an optimal user experience for the customers. Sharing this passion around the world with speaking at over 30 conferences and meetups he enables others to do the same! \nAs co-founder of Baseflow, he is helping companies to execute their mobile strategy, while as a thought leader in open source software, used by companies like Microsoft, Google and Apple he has shown to turn ideas into reality. As the creator of packages for .NET like MvvmCross, VLC, MediaManager, Lottie and ExoPlayer he is well known in the industry.",
+    "SocialMediaAccounts": [],
+    "Sessions": []
+  }
+]

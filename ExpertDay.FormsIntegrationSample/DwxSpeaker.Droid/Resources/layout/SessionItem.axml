@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="26.06.2017 17:00 - 18:00 Uhr"
+            android:id="@+id/sessionitem_time" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=".NET Core"
+            android:id="@+id/sessionitem_track" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Vom Code bis in die Produktion: ASP.NET Core mit Docker und VSTS nach Azure"
+        android:layout_height="wrap_content"
+        android:id="@+id/sessionitem_title" />
+</LinearLayout>
